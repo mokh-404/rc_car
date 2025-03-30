@@ -5,7 +5,7 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       android_signing:
-        - keystore: $CM_KEYSTORE
+        - keystore: "C:/Users/Rama2/my-release-key.keystore"
       groups:
         - google_play
       vars:
