@@ -5,8 +5,11 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       android_signing:
-        - keystore:
-            reference: release-keystore
+        - name: release
+          filePath: keystore.jks
+          type: keystore
+          group: android_signing
+          source: codemagic
       groups:
         - google_play
       vars:
