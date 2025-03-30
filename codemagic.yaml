@@ -5,19 +5,15 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       android_signing:
-        - name: release
-          filePath: keystore.jks
-          type: keystore
-          group: android_signing
-          source: codemagic
+        - keystore: $CM_KEYSTORE
       groups:
         - google_play
       vars:
         PACKAGE_NAME: "com.example.bluetoothcarcontroller"
-        STORE_PASSWORD: ${KEYSTORE_PASSWORD}
-        KEY_PASSWORD: ${KEY_PASSWORD}
-        KEY_ALIAS: ${KEY_ALIAS}
-        KEYSTORE_PATH: $CM_KEYSTORE_PATH
+        STORE_PASSWORD: "CNOUOLSTC"
+        KEY_PASSWORD: "CNOUOLSTC"
+        KEY_ALIAS: "release"
+        KEYSTORE_PATH: "C:/Users/Rama2/my-release-key.keystore"
     scripts:
       - name: Set up local properties
         script: |
