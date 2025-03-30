@@ -1,0 +1,39 @@
+workflows:
+  android-app:
+    name: Android App
+    max_build_duration: 30
+    instance_type: mac_mini_m1
+    environment:
+      android_signing:
+        - keystore_reference
+      groups:
+        - google_play
+      vars:
+        PACKAGE_NAME: "com.example.bluetoothcarcontroller"
+        STORE_PASSWORD: ${KEYSTORE_PASSWORD}
+        KEY_PASSWORD: ${KEY_PASSWORD}
+        KEY_ALIAS: ${KEY_ALIAS}
+        KEYSTORE_PATH: $CM_KEYSTORE_PATH
+    scripts:
+      - name: Set up local properties
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+      - name: Build Android release
+        script: |
+          ./gradlew bundleRelease
+          ./gradlew assembleRelease
+      - name: Sign Android release
+        script: |
+          echo "Signing APK..."
+          apksigner sign --ks $KEYSTORE_PATH \
+            --ks-pass pass:$STORE_PASSWORD \
+            --ks-key-alias $KEY_ALIAS \
+            --key-pass pass:$KEY_PASSWORD \
+            --in app/build/outputs/apk/release/app-release-unsigned.apk \
+            --out app/build/outputs/apk/release/app-release-signed.apk
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
+    publishing:
+      email:
+        recipients:
+          - user@example.com

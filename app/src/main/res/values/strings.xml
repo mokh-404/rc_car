@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bluetooth Car Controller</string>
+    <string name="scan_for_hc05">Scan for HC-05</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connecting">Connecting...</string>
+    <string name="scanning">Scanning...</string>
+    <string name="bluetooth_not_enabled">Bluetooth is not enabled</string>
+    <string name="hc05_not_found">HC-05 device not found</string>
+    <string name="connection_lost">Connection lost. Attempting to reconnect...</string>
+    <string name="connection_failed">Failed to connect. Please try again.</string>
+</resources>
