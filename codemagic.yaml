@@ -13,7 +13,7 @@ workflows:
         PACKAGE_NAME: "com.example.bluetoothcarcontroller"
         STORE_PASSWORD: "RC-proj"
         KEY_PASSWORD: "RC-proj"
-        KEY_ALIAS: "release"
+        KEY_ALIAS: "new_key_alias"
         KEYSTORE_PATH: "c:/Users/Rama2/new-release-key.keystore"
     cache:
       cache_paths:
