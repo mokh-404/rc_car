@@ -1,26 +1,25 @@
 workflows:
   android-app:
     name: Android App
-    max_build_duration: 30
-    instance_type: mac_mini_m1
+    max_build_duration: 120
+    instance_type: linux
     environment:
+      java: 17
       android_signing:
-        - keystore: "C:/Users/Rama2/my-release-key.keystore"
+        - keystore: "my-release-key.keystore"
       groups:
         - google_play
       vars:
         PACKAGE_NAME: "com.example.bluetoothcarcontroller"
-        STORE_PASSWORD: "CNOUOLSTC"
-        KEY_PASSWORD: "CNOUOLSTC"
+        STORE_PASSWORD: "RC-proj"
+        KEY_PASSWORD: "RC-proj"
         KEY_ALIAS: "release"
-        KEYSTORE_PATH: "C:/Users/Rama2/my-release-key.keystore"
+        KEYSTORE_PATH: "new-release-key.keystore"
+    cache:
+      cache_paths:
+        - $HOME/.gradle/caches
+        - $HOME/.gradle/wrapper
     scripts:
-      - name: Set up local properties
-        script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
-      - name: Build Android release
-        script: |
-          ./gradlew bundleRelease
           ./gradlew assembleRelease
       - name: Sign Android release
         script: |
