@@ -6,7 +6,7 @@ workflows:
     environment:
       java: 17
       android_signing:
-        - keystore: "c:/Users/Rama2/new-release-key.keystore"
+        - keystore: "release-key"
       groups:
         - google_play
       vars:
@@ -14,7 +14,7 @@ workflows:
         STORE_PASSWORD: "RC-proj"
         KEY_PASSWORD: "RC-proj"
         KEY_ALIAS: "new_key_alias"
-        KEYSTORE_PATH: "c:/Users/Rama2/new-release-key.keystore"
+        KEYSTORE_PATH: "release-key"
     cache:
       cache_paths:
         - $HOME/.gradle/caches
