@@ -6,7 +6,7 @@ workflows:
     environment:
       java: 17
       android_signing:
-        - keystore: "my-release-key.keystore"
+        - keystore: "c:/Users/Rama2/new-release-key.keystore"
       groups:
         - google_play
       vars:
@@ -14,22 +14,15 @@ workflows:
         STORE_PASSWORD: "RC-proj"
         KEY_PASSWORD: "RC-proj"
         KEY_ALIAS: "release"
-        KEYSTORE_PATH: "new-release-key.keystore"
+        KEYSTORE_PATH: "c:/Users/Rama2/new-release-key.keystore"
     cache:
       cache_paths:
         - $HOME/.gradle/caches
         - $HOME/.gradle/wrapper
     scripts:
-          ./gradlew assembleRelease
+      - ./gradlew assembleRelease
       - name: Sign Android release
-        script: |
-          echo "Signing APK..."
-          apksigner sign --ks $KEYSTORE_PATH \
-            --ks-pass pass:$STORE_PASSWORD \
-            --ks-key-alias $KEY_ALIAS \
-            --key-pass pass:$KEY_PASSWORD \
-            --in app/build/outputs/apk/release/app-release-unsigned.apk \
-            --out app/build/outputs/apk/release/app-release-signed.apk
+        script: apksigner sign --ks $KEYSTORE_PATH --ks-pass pass:$STORE_PASSWORD --ks-key-alias $KEY_ALIAS --key-pass pass:$KEY_PASSWORD --in app/build/outputs/apk/release/app-release-unsigned.apk --out app/build/outputs/apk/release/app-release-signed.apk
     artifacts:
       - app/build/outputs/apk/release/*.apk
     publishing:
